@@ -1,11 +1,11 @@
 {
   "aliases": ["code-quality", "code-quality-pack"],
   "copy-from-recipe": {
-    "code-quality-pack/.ddev/": ".ddev/",
-    "code-quality-pack/tests/": "tests/",
-    "code-quality-pack/.php-cs-fixer.dist.php": ".php-cs-fixer.dist.php",
-    "code-quality-pack/grumphp.yml": "grumphp.yml",
-    "code-quality-pack/phpstan.dist.neon": "phpstan.dist.neon"
+    ".ddev/": ".ddev/",
+    "tests/": "tests/",
+    ".php-cs-fixer.dist.php": ".php-cs-fixer.dist.php",
+    "grumphp.yml": "grumphp.yml",
+    "phpstan.dist.neon": "phpstan.dist.neon"
   },
   "gitignore": [
     "/.idea/"
