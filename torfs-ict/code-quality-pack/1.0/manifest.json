@@ -7,9 +7,6 @@
     "grumphp.yml": "grumphp.yml",
     "phpstan.dist.neon": "phpstan.dist.neon"
   },
-  "gitignore": [
-    "/.idea/"
-  ],
   "post-install-output": [
     "<bg=blue;fg=white>              </>",
     "<bg=blue;fg=white> What's next? </>",

@@ -10,7 +10,63 @@ defaults:
     shell: bash
 
 jobs:
-  call-flex-update:
+  prepare-build:
+    name: Prepare build environment
+    runs-on: Ubuntu-20.04
+    steps:
+      -
+        name: Checkout git repository
+        uses: actions/checkout@v3
+        id: checkout
+        with:
+          fetch-depth: 0
+
+      -
+        name: Configure git
+        run: |
+          git config --global user.email ""
+          git config --global user.name "github-action[bot]"
+
+      -
+        name: Create build branch
+        run: |
+          git push origin -d flex/main || true
+          git checkout -b flex/main
+          git push -u origin flex/main
+
+
+  build:
+    name: Build Flex endpoint
+    needs: [prepare-build]
     uses: symfony/recipes/.github/workflows/callable-flex-update.yml@main
     with:
       contrib: true
+
+  merge:
+    name: Merge changes
+    needs: [prepare-build, build]
+    runs-on: Ubuntu-20.04
+    steps:
+      -
+        name: Checkout git repository
+        uses: actions/checkout@v3
+        id: checkout
+        with:
+          fetch-depth: 0
+
+      -
+        name: Configure git
+        run: |
+          git config --global user.email ""
+          git config --global user.name "github-action[bot]"
+
+      -
+        name: Merge changes back into main branch
+        run: | 
+          git merge origin/flex/main -m "Merge built artifacts"
+          git push -u origin main
+
+      -
+        name: Remove build branch
+        run: |
+          git push origin -d flex/main
