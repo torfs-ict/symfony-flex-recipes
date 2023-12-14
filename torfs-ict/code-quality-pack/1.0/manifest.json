@@ -1,0 +1,22 @@
+{
+  "copy-from-recipe": {
+    "code-quality-pack/.ddev/": ".ddev/",
+    "code-quality-pack/tests/": "tests/",
+    "code-quality-pack/.php-cs-fixer.dist.php": ".php-cs-fixer.dist.php",
+    "code-quality-pack/grumphp.yml": "grumphp.yml",
+    "code-quality-pack/phpstan.dist.neon": "phpstan.dist.neon"
+  },
+  "gitignore": [
+    "/.idea/"
+  ],
+  "post-install-output": [
+    "<bg=blue;fg=white>              </>",
+    "<bg=blue;fg=white> What's next? </>",
+    "<bg=blue;fg=white>              </>",
+    "",
+    "  * <fg=blue>Restart</> your application:",
+    "    1. Change to the project directory;",
+    "    2. Execute the <comment>ddev restart</> command;",
+    "    3. Code quality checks will now run on <comment>every</comment> commit."
+  ]
+}

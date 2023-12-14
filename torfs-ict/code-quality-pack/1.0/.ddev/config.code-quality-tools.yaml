@@ -1,0 +1,5 @@
+hooks:
+  post-start:
+    - composer: install
+    - exec: curl -sS https://get.symfony.com/cli/installer | bash -s -- --install-dir /var/www/html/vendor/bin
+    - exec: grumphp git:init
