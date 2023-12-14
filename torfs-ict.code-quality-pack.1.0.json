@@ -1,0 +1,127 @@
+{
+    "manifests": {
+        "torfs-ict/code-quality-pack": {
+            "manifest": {
+                "copy-from-recipe": {
+                    ".ddev/": ".ddev/",
+                    "tests/": "tests/",
+                    ".php-cs-fixer.dist.php": ".php-cs-fixer.dist.php",
+                    "grumphp.yml": "grumphp.yml",
+                    "phpstan.dist.neon": "phpstan.dist.neon"
+                },
+                "post-install-output": [
+                    "<bg=blue;fg=white>              </>",
+                    "<bg=blue;fg=white> What's next? </>",
+                    "<bg=blue;fg=white>              </>",
+                    "",
+                    "  * <fg=blue>Restart</> your application:",
+                    "    1. Change to the project directory;",
+                    "    2. Execute the <comment>ddev restart</> command;",
+                    "    3. Code quality checks will now run on <comment>every</comment> commit."
+                ]
+            },
+            "files": {
+                ".ddev/config.code-quality-tools.yaml": {
+                    "contents": [
+                        "hooks:",
+                        "  post-start:",
+                        "    - composer: install",
+                        "    - exec: curl -sS https://get.symfony.com/cli/installer | bash -s -- --install-dir /var/www/html/vendor/bin",
+                        "    - exec: grumphp git:init"
+                    ],
+                    "executable": false
+                },
+                ".php-cs-fixer.dist.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "$finder = (new PhpCsFixer\\Finder())",
+                        "    ->in(__DIR__)",
+                        "    ->exclude('var')",
+                        ";",
+                        "",
+                        "return (new PhpCsFixer\\Config())",
+                        "    ->setRules([",
+                        "        '@Symfony' => true,",
+                        "        'phpdoc_to_comment' => false,",
+                        "    ])",
+                        "    ->setFinder($finder)",
+                        ";",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "grumphp.yml": {
+                    "contents": [
+                        "grumphp:",
+                        "    stop_on_failure: true",
+                        "    fixer:",
+                        "        fix_by_default: true",
+                        "    tasks:",
+                        "        composer: ~",
+                        "        git_blacklist:",
+                        "            keywords:",
+                        "                - \"die\\\\(\"",
+                        "                - \"var_dump\\\\(\"",
+                        "                - \"print_r\\\\(\"",
+                        "                - \"print\\\\(\"",
+                        "                - \"dump\\\\(\"",
+                        "                - \"debug_backtrace\\\\(\"",
+                        "                - \"exit;\"",
+                        "                - \"echo \"",
+                        "                - \"console.log\\\\(\"",
+                        "            regexp_type: E",
+                        "        phpcsfixer2:",
+                        "            config: ./.php-cs-fixer.dist.php",
+                        "        phpstan: ~",
+                        "        securitychecker_symfony: ~",
+                        "        twigcs:",
+                        "            path: './templates/'",
+                        "        yamllint:",
+                        "            parse_custom_tags: true",
+                        "    environment:",
+                        "        files:",
+                        "            - .env"
+                    ],
+                    "executable": false
+                },
+                "phpstan.dist.neon": {
+                    "contents": [
+                        "parameters:",
+                        "    level: max",
+                        "    paths:",
+                        "        - src",
+                        "        - tests",
+                        "    symfony:",
+                        "        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml",
+                        "        consoleApplicationLoader: tests/phpstan-cli.php",
+                        "    scanDirectories:",
+                        "        - var/cache/dev/Symfony/Config",
+                        "",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "tests/phpstan-cli.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "use App\\Kernel;",
+                        "use Symfony\\Bundle\\FrameworkBundle\\Console\\Application;",
+                        "use Symfony\\Component\\Dotenv\\Dotenv;",
+                        "",
+                        "require __DIR__.'/../vendor/autoload.php';",
+                        "",
+                        "(new Dotenv())->bootEnv(__DIR__.'/../.env');",
+                        "",
+                        "$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);",
+                        "",
+                        "return new Application($kernel);"
+                    ],
+                    "executable": false
+                }
+            },
+            "ref": "06e3ab3dcc390009f78d7b939e9e9b93752fe3ba"
+        }
+    }
+}
