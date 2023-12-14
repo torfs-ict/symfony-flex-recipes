@@ -1,4 +1,5 @@
 {
+  "aliases": ["code-quality", "code-quality-pack"],
   "copy-from-recipe": {
     "code-quality-pack/.ddev/": ".ddev/",
     "code-quality-pack/tests/": "tests/",
