@@ -1,0 +1,15 @@
+{
+    "manifests": {
+        "torfs-ict/code-monitoring-bundle": {
+            "manifest": {
+                "env": {
+                    "TORFS_IO_MONITORING_ENDPOINT": "",
+                    "TORFS_IO_MONITORING_PROJECT": "",
+                    "TORFS_IO_MONITORING_SECRET": ""
+                }
+            },
+            "files": [],
+            "ref": "215b240a0528a47a7ab146ca229148831da52af9"
+        }
+    }
+}
