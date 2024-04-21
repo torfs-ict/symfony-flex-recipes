@@ -1,0 +1,8 @@
+{
+  "aliases": ["code-monitoring", "code-monitoring-bundle", "monitoring"],
+  "env": {
+    "TORFS_IO_MONITORING_ENDPOINT": "",
+    "TORFS_IO_MONITORING_PROJECT": "",
+    "TORFS_IO_MONITORING_SECRET": ""
+  }
+}

@@ -3,7 +3,10 @@
         "code-quality": "torfs-ict/code-quality-pack",
         "code-quality-pack": "torfs-ict/code-quality-pack",
         "codequality": "torfs-ict/code-quality-pack",
-        "codequalitypack": "torfs-ict/code-quality-pack"
+        "codequalitypack": "torfs-ict/code-quality-pack",
+        "code-monitoring": "torfs-ict/code-monitoring-bundle",
+        "code-monitoring-bundle": "torfs-ict/code-monitoring-bundle",
+        "monitoring": "torfs-ict/code-monitoring-bundle"
     },
     "recipes": {
         "torfs-ict/code-quality-pack": [
